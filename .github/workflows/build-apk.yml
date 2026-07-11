@@ -18,9 +18,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '22'
-
-      - name: Remove sharp from devDependencies (not needed in CI)
-        run: npm pkg delete devDependencies.sharp
+          cache: 'npm'
 
       - name: Install dependencies
         run: npm install
@@ -28,16 +26,23 @@ jobs:
       - name: Build web assets
         run: npm run build
 
+      - name: Generate Capacitor Assets
+        run: |
+          mkdir -p assets
+          cp public/favicon.png assets/icon.png
+          cp public/favicon.png assets/splash.png
+          npx @capacitor/assets generate --android
+
       - name: Install Capacitor CLI
         run: npm install -g @capacitor/cli
 
       - name: Sync Capacitor Android
         run: npx cap sync android
 
-      - name: Setup Java 17
+      - name: Setup Java 21
         uses: actions/setup-java@v4
         with:
-          java-version: '17'
+          java-version: '21'
           distribution: 'temurin'
           cache: 'gradle'
 
@@ -48,9 +53,6 @@ jobs:
         run: |
           curl -fsSL \
             https://raw.githubusercontent.com/gradle/gradle/v8.14.3/gradle/wrapper/gradle-wrapper.jar \
-            -o android/gradle/wrapper/gradle-wrapper.jar || \
-          curl -fsSL \
-            https://github.com/gradle/gradle/releases/download/v8.14.3/gradle-8.14.3-wrapper.jar \
             -o android/gradle/wrapper/gradle-wrapper.jar || \
           wget -q -O android/gradle/wrapper/gradle-wrapper.jar \
             "https://github.com/gradle/gradle/raw/v8.14.3/gradle/wrapper/gradle-wrapper.jar"
