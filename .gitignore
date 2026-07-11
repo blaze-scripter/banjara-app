@@ -1,0 +1,24 @@
+# Node
+node_modules/
+dist/
+
+# Logs
+npm-debug.log*
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temp scripts
+generate-icons.mjs
+update_mcp.ps1
+file_contents_batch1.json
+
+# Android build outputs
+android/app/build/
+android/.gradle/
+android/build/
+
+# Capacitor
+.capacitor/

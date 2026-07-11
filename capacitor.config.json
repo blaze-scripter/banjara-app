@@ -1,0 +1,10 @@
+{
+  "appId": "com.banjara.app",
+  "appName": "Banjara App",
+  "webDir": "dist",
+  "plugins": {
+    "SplashScreen": {
+      "launchAutoHide": false
+    }
+  }
+}
