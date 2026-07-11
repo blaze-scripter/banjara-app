@@ -29,8 +29,8 @@ jobs:
       - name: Generate Capacitor Assets
         run: |
           mkdir -p assets
-          cp public/favicon.png assets/icon.png
-          cp public/favicon.png assets/splash.png
+          echo "iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAIAAAAlC+aJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAA7SURBVGhD7cExAQAAAMKg9U9tCy8gAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEeUoAAcx7KxgAAAAASUVORK5CYII=" | base64 -d > assets/icon.png
+          cp assets/icon.png assets/splash.png
           npx --yes @capacitor/assets generate --android
 
       - name: Sync Capacitor
@@ -41,9 +41,6 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-
-      - name: Set up Android SDK
-        uses: android-actions/setup-android@v3
 
       - name: Make Gradle wrapper executable
         working-directory: android
