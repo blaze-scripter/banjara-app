@@ -31,10 +31,10 @@ jobs:
           mkdir -p assets
           cp public/favicon.png assets/icon.png
           cp public/favicon.png assets/splash.png
-          npx @capacitor/assets generate --android
+          npx --yes @capacitor/assets generate --android
 
       - name: Sync Capacitor
-        run: npx cap sync android
+        run: npx --yes @capacitor/cli sync android
 
       - name: Set up JDK 21
         uses: actions/setup-java@v4
